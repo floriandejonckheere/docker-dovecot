@@ -4,8 +4,8 @@ MAINTAINER "Florian Dejonckheere <florian@floriandejonckheere.be>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update
-RUN apt-get -y install dovecot-imapd dovecot-pop3d dovecot-ldap
+RUN apt-get update && \
+	apt-get -y install dovecot-imapd dovecot-pop3d dovecot-ldap
 
 # Create app structure
 RUN mkdir -p /app/ /var/mail/ /etc/dovecot/
@@ -17,6 +17,10 @@ RUN chmod a+x /app/start.sh
 RUN groupadd -g 5000 vmail && useradd vmail -u 5000 -g vmail -s /sbin/nologin -d /var/mail/
 RUN chmod 0777 /var/mail/
 RUN chown -R vmail:vmail /var/mail/
+
+# Dovecot init file
+ADD etc/init.d/dovecot /etc/init.d/dovecot
+RUN chmod a+x /etc/init.d/dovecot
 
 VOLUME /var/mail/
 

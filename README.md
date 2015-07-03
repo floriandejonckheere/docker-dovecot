@@ -6,7 +6,8 @@ This Dockerfile provides a container running Dovecot over TLS in a multi-domain 
 
 ### Dovecot
 
-Configure dovecot in `etc/dovecot/`.
+Configure dovecot in `etc/dovecot/`. Refer to the [dovecot wiki](wiki2.dovecot.org) for extended configuration.
+Don't forget to place or symlink your keys in `etc/ssl` and modify the configuration accordingly
 
 ## Build
 
