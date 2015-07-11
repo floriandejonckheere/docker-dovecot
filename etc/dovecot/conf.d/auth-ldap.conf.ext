@@ -16,12 +16,17 @@ passdb {
 #  driver = prefetch
 #}
 
-userdb {
-  driver = ldap
-  args = /etc/dovecot/dovecot-ldap.conf.ext
+#userdb {
+#  driver = ldap
+#  args = /etc/dovecot/dovecot-ldap-user.conf.ext
   
   # Default fields can be used to specify defaults that LDAP may override
-  #default_fields = home=/home/virtual/%u
+#  default_fields = home=/var/mail/%d/%n,uid=vmail,gid=vmail
+#}
+
+userdb {
+  driver = static
+  args = uid=vmail gid=vmail home=/var/mail/%d/%n/ mail=maildir:/var/mail/%d/%n/
 }
 
 # If you don't have any user-specific settings, you can avoid the userdb LDAP
